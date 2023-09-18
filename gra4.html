@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gra4</title>
+    <link rel="stylesheet" href="format.css">
+    <script src="globals.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="centered-content">
+            <h1>Гра "Пелюстки бажань"</h1>
+            <div class="image-container">
+                    <img src="poleKM.png" alt="Поле" > <!--class="resized-image"-->
+            </div>
+<h3 id="result-text"></h3> <!-- Элемент h3 для отображения цели -->
+
+            <p id="final"></p>
+            <script>
+                document.getElementById("result-text").textContent = "Щоб реалізувати: " +localStorage.getItem('goal') + ", " + "виконайте ці кроки:";
+                document.getElementById("final").textContent = localStorage.getItem('final');
+                var finalElement = document.getElementById("final");
+                var updatedText = finalElement.textContent.replaceAll(";;", ".\n");
+                finalElement.textContent = updatedText;
+            </script>
+          </div>
+      </div>
+</body>
+</html>
