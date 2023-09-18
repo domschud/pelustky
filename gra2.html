@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Gra2</title>
+        <link rel="stylesheet" href="format.css">
+        <script src="globals.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="centered-content">
+                <h1>Гра "Пелюстки бажань"</h1>
+                <div class="image-container">
+                    <img src="poleKM.png" alt="Поле" class="resized-image">
+                </div>
+                <h3>Сформулюйте своє бажання/проект/ціль </h3>
+
+                <input type="text" id="goal" placeholder="Ціль">
+
+                <button class="my-button" onclick="rollDice()">Перевірити</button>
+
+                <div id="dice-container">
+                    <img id="dice1Image" alt="Кубик 1" class="dice">
+                    <img id="dice2Image" alt="Кубик 2" class="dice">
+                </div>
+                <h3 id="result-text"></h3> <!-- Элемент h3 для отображения результата -->
+                <script>
+
+                    var dice1Value = 1;
+                    var dice2Value = 1;
+                    localStorage.setItem('dice1Value', dice1Value);
+                    localStorage.setItem('dice2Value', dice2Value);
+                    localStorage.setItem('final', "");
+
+                    var dice1Image = document.querySelector("#dice-container img:nth-child(1)");
+                    var dice2Image = document.querySelector("#dice-container img:nth-child(2)");
+
+                    dice1Image.src = "dice1" + dice1Value + ".png";
+                    dice2Image.src = "dice2" + dice2Value + ".png";
+
+                    function rollDice() {
+                        var dice1 = Math.floor(Math.random() * 6) + 1; // Случайное число от 1 до 6 для первого кубика
+                        var dice2 = Math.floor(Math.random() * 6) + 1; // Случайное число от 1 до 6 для второго кубика
+
+                        dice1Value = dice1;
+                        dice2Value = dice2;
+
+                        localStorage.setItem('dice1Value', dice1Value);
+                        localStorage.setItem('dice2Value', dice2Value);
+
+                        dice1Image.src = "dice1" + dice1Value + ".png";
+                        dice2Image.src = "dice2" + dice2Value + ".png";
+
+                        var goalField = document.getElementById("goal");
+                        var goal = goalField.value;
+
+                        var resultText = document.getElementById("result-text");
+                        localStorage.setItem('goal', goal);
+
+                        if (dice1 >= dice2) {
+                            resultText.textContent = "Вітаємо! Вперед у гру!";
+ 		                            
+                            var t = Math.pow(-1, dice2Value+1);;
+                            var go = 240+dice1Value*t;
+                            localStorage.setItem('go', go);
+                            localStorage.setItem('t', t);
+                            
+                            setTimeout(function() {
+                                window.location.href = "gra3.html";
+                            }, 500);
+
+                        } else {
+                            resultText.textContent = "Будь-ласка, переформулюйте ваше бажання/проект/ціль";
+                        }
+                    }
+                </script>
+            </div>
+          </div>
+    </body>
+</html>
