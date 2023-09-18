@@ -1,0 +1,43 @@
+body {
+    background-image: url('fon7.jpg');
+    background-repeat: repeat-y;
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+    font-family: Segoe Script, sans-serif;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+  .image-container {
+    text-align: center;
+    margin-bottom: 35px;
+}
+  .resized-image {
+    width: 50%; 
+    height: auto;
+    margin: 0 auto;
+    display: block;
+  }
+  .my-button {
+    padding: 10px 20px;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+   
+}
