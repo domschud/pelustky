@@ -2,7 +2,7 @@
 <html>
 <head>
      <meta name="viewport" content="height=device-height" initial-scale=0.85">
-    <title>Gra3</title>
+    <title>test</title>
     <link rel="stylesheet" href="format.css">
 <style>
 	.img-scale {
@@ -63,7 +63,7 @@
                 dice2Image.src = "dice2" + dice2Value + ".png";
                 
                 if (go%8==0){
-                    window.location.href = "gra3.html";
+                    window.location.href = "test.html";
                 }
                 if (dice1Value==dice2Value){
 		    document.getElementById("go-text").textContent = "Зараз ви на полі: " + smallArray[dice1Value-1];
@@ -103,7 +103,7 @@
                         localStorage.setItem('t', t);
                         }                            
                  setTimeout(function() {
-                        window.location.href = "gra3.html";
+                        window.location.href = "test.html";
                         }, 500);
                         } else {
                         document.getElementById("hint-text").textContent = "Йой, супротив Всесвіту більший за ваші сили. Яку іншу дію можна зробити?";
