@@ -88,11 +88,11 @@
 	<div class="container">
 		<div class="centered-content">
             <h1>Гра "Пелюстки бажань"</h1>
-  			<h3 id="result-text"></h3> <!-- Элемент h3 для отображения цели -->
+  			<h3 id="result-text"></h3> 
 		    <div class="image-container">
-                <img src="poleT.png" alt="Поле" width="300px" class="img-scale" > <!--class="resized-image" margin: 0 auto;  -->
-	        </div>
-            <h3 id="go-text"></h3> <!-- Элемент h3 для отображения поля -->
+               		 <img src="poleT.png" alt="Поле" width="300px" class="img-scale" > <!--class="resized-image" margin: 0 auto;  -->
+	            </div>
+            		<h3 id="go-text"></h3> 
 			<h4 id="go-text2"></h4>
 			<h5 id="go-text3"></h5>
 			<h5 id="go-text4"></h5>
@@ -104,8 +104,8 @@
                 <img id="dice1Image" alt="Кубик 1" class="dice">
                 <img id="dice2Image" alt="Кубик 2" class="dice">
            	</div>
-	        <h5 id="hint-text"></h5> <!-- Элемент h3 для отображения результата -->
-            <p id="hint1-text"></p> <!-- Элемент h3 для отображения результата -->
+	        <h5 id="hint-text"></h5> 
+            	<p id="hint1-text"></p> 
 	        <p id="final"></p>
            <script>
                 // Чтение значения goal из Local Storage
@@ -115,12 +115,8 @@
                 var go = localStorage.getItem("go");
                 var t = localStorage.getItem("t");
 
-                document.getElementById("result-text").textContent = "Вас цікавить: " + goal; 
-		//document.getElementById("hint1-text").textContent = "go= " + go + "    t= "+t;
-                //document.getElementById("final").textContent = localStorage.getItem('final');
-		//var peroImage = document.getElementById("dice1Image");моя картинка
-                
-		        var dice1Image = document.getElementById("dice1Image");
+                document.getElementById("result-text").textContent = "Вас цікавить: " + goal; 		            
+		var dice1Image = document.getElementById("dice1Image");
                 var dice2Image = document.getElementById("dice2Image");
                 dice1Image.src = "dice1" + dice1Value + ".png";
                 dice2Image.src = "dice2" + dice2Value + ".png";
@@ -149,8 +145,7 @@
                     dice2Value = dice2;
                     localStorage.setItem('dice1Value', dice1Value);
                     localStorage.setItem('dice2Value', dice2Value);
-                                        
-                    //document.getElementById("hint1-text").textContent = "Яку іншу дію можна зробити?";
+                    
                  if (dice1Value >= dice2Value) {
                     document.getElementById("hint-text").textContent = "Чудовий крок";
 
