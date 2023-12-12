@@ -5,8 +5,63 @@
         <title>Gra2</title>
         <link rel="stylesheet" href="format.css">
         <script src="globals.js"></script>
-    </head>
-    <body>
+       <style>
+            .fixed-image {
+                position: fixed;
+                top: 10%;
+		        margin-left: 5%;
+                z-index: 1;
+                cursor: pointer;
+            }                
+            /* Стилі для модального вікна */
+            .modal {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 2;
+                justify-content: center;
+                align-items: center;
+            }
+            .modal-content {
+                background-color: #fff;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 70%;
+                text-align: center;
+            }
+            .close {
+                color: red;
+                cursor: pointer;
+                text-decoration: underline;
+                position: absolute;
+                top: 10px;
+                right: 10px;
+            }
+		    .bold-text {
+ 		        font-weight: bold;
+		        font-size: 18px;
+	        }
+        </style>
+      </head>
+<body>
+<!-- Зафіксоване зображення -->
+<div class="fixed-image">
+    <img src="pdsk.png" alt="Потрібна підказка?" style="width: 30%;" onclick="openModal()" />
+</div>
+<!-- Модальне вікно -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <p>Зазвичай ми маємо багато бажань, задумів, та цілей. Серед них є ті, які начебто хочеться (чи дуже хочеться), але вони не рухаються, бо щось заважає, або не зрозуміло з чого почати, або є конкретний проект/задум/ ціль і хочеться його спланувати так, щоб він точно був успішним, без перешкод. І ми готові для цього прикласти зусилля. </p>
+        <p>Тож найкращій варіант формулювання цілі, або бажання, або задуманого проекту -   це те на що можна сказати: <span class="bold-text"> «Я хочу це! і справді готова/ий для цього робити певні дії та прикласти зусилля".</span></p>
+        <p>Але, крім нас в цю гру грає ще 2 учасники: Підсвідоме і Всесвіт. Доки ми думаємо і формулюємо намір, вони міряються своїми силами випробовуючи ціль: якщо формулювання не пройшло, варто його скорегувати (замінити якісь деталі, або весь задум).
+        </p>
+    </div>
+</div>
         <div class="container">
             <div class="centered-content">
                 <h1>Гра "Пелюстки бажань"</h1>
@@ -38,6 +93,7 @@
                     dice1Image.src = "dice1" + dice1Value + ".png";
                     dice2Image.src = "dice2" + dice2Value + ".png";
 
+
                     function rollDice() {
                         var dice1 = Math.floor(Math.random() * 6) + 1; // Случайное число от 1 до 6 для первого кубика
                         var dice2 = Math.floor(Math.random() * 6) + 1; // Случайное число от 1 до 6 для второго кубика
@@ -50,6 +106,7 @@
 
                         dice1Image.src = "dice1" + dice1Value + ".png";
                         dice2Image.src = "dice2" + dice2Value + ".png";
+                        
 
                         var goalField = document.getElementById("goal");
                         var goal = goalField.value;
@@ -58,6 +115,7 @@
                         localStorage.setItem('goal', goal);
 
                         if (dice1 >= dice2) {
+                           
                             resultText.textContent = "Вітаємо! Вперед у гру!";
  		                            
                             var t = Math.pow(-1, dice2Value+1);;
@@ -72,7 +130,21 @@
                         } else {
                             resultText.textContent = "Будь-ласка, переформулюйте ваше бажання/проект/ціль";
                         }
-                    }
+                    }                    
+                    // Відкриття модального вікна
+                    function openModal() {
+                        document.getElementById('myModal').style.display = 'flex';
+                     }
+                    // Закриття модального вікна
+                    function closeModal() {
+                     document.getElementById('myModal').style.display = 'none';
+                     }
+                    // Закриття модального вікна при кліку за межами вікна
+                    window.onclick = function (event) {
+                    if (event.target == document.getElementById('myModal')) {
+                    closeModal();
+                     }
+                    }    
                 </script>
             </div>
           </div>
