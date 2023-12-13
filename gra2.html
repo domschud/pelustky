@@ -116,7 +116,7 @@
 
                         if (dice1 >= dice2) {
                            
-                            resultText.textContent = "Вітаємо! Вперед у гру!";
+                            resultText.textContent = "Чудова ціль! Вітаємо! Вперед у гру!";
  		                            
                             var t = Math.pow(-1, dice2Value+1);;
                             var go = 240+dice1Value*t;
@@ -125,7 +125,7 @@
                             
                             setTimeout(function() {
                                 window.location.href = "gra3.html";
-                            }, 500);
+                            }, 1000);
 
                         } else {
                             resultText.textContent = "Будь-ласка, переформулюйте ваше бажання/проект/ціль";
