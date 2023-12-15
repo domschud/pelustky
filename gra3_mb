@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width">
+    <title>Gra3</title>
+    <link rel="stylesheet" href="format.css">
+<style>
+	.img-scale {
+		transition: 1s; /* Час ефекту  */		
+    }
+	.img-scale:hover {
+		transform: scale(230%); /* Збільшуємо масштаб */		
+    }
+	h4 { color: #1A3B1D; 
+	    margin: 0 auto;
+	    position: center;
+	    width: 80%;
+	    font-style: italic;
+	    text-shadow: 2px 2px 2px white;
+     }
+	.centered-content {
+	    height: 98vh;
+  	    max-height: 98vh; 
+  	    overflow: auto;
+	}
+    .fixed-image {
+        position: fixed;
+        top: 10%;
+		    margin-left: 1%;
+        z-index: 1;
+        cursor: pointer;
+    }
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(128, 111, 86, 0.5);
+        z-index: 2;
+        justify-content: center;
+        align-items: center;
+		    overflow: auto;
+    }
+    .modal-content {
+        background-color: rgb(253, 251, 246);
+        padding: 20px;
+        border: 1px solid #888;
+        width: 70%;
+        text-align: center;
+        border-radius: 10px; /* Закруглені кути */
+        overflow: auto;
+		    max-height: 95%;
+    }
+    .close {
+        color: red;
+        cursor: pointer;
+        text-decoration: underline;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+		.bold-text {
+  		font-weight: bold;
+		font-size: 18px;
+	}
+</style>    
+	<script src="globals.js"></script>
+</head>
+<body>
+    <!-- Зафіксоване зображення -->
+<div class="fixed-image">
+    <img src="pdsk2.png" alt="Потрібна підказка?" style="width: 27%;" onclick="openModal()" />
+</div>
+<!-- Модальне вікно -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <p>Зараз не думайте про ціль, в цій грі ви потрапляєте саме на ті поля-теми, де сховалися перешкоди задуманому. Це може бути внутрішній конфлікт між протилежностями, а може невирішена задачка на тілесному, емоційному чи рівні свідомості.</p> 
+        <p> <span class="bold-text"> Тож прочитайте опис поля-теми на який ви потрапили і ловіть свої асоціації, емоції, перші образи та думки, </span> після чого спитайте себе <span class="bold-text"> «Яку невелику, але конкретну дію у цій сфері я можу зробити?». </span></p> 
+        <p>- Це має бути дія яку ви справді готові виконати у реальності (тому не беріть глобальні, довгострокові і багаторазові). Дії які треба робити регулярно теж можливі, але тільки якщо ви впевнені, що будете це робити. Чим вона конкретніша тим краще.</p>
+        <p>- Якщо дія не проходить випробування (кубики змінили значення, внизу під ними з’явився напис з проханням її скорегувати, а саме поле-тема не змінилося) це означає, що вона не впливає на ваш задум, або ви не маєте внутрішніх сил на цю дію.</p>
+        <p>- При повторному попаданню на одну й ту саму тему, дії мають бути новими </p>
+    </div>
+</div>
+<div id="message-modal" class="modal">
+  <div class="modal-content">
+      <span class="close" onclick="closeMessageModal()">&times;</span>
+      <p id="message-text"></p>
+  </div>
+</div>
+	<div class="container">
+		<div class="centered-content">
+            <h1>Гра "Пелюстки бажань"</h1>
+  			<h3 id="result-text"></h3> <!-- Элемент h3 для отображения цели -->
+		    <div class="image-container">
+                <img src="poleT.png" alt="Поле" width="230px" class="img-scale" > <!--class="resized-image" margin: 0 auto;  -->
+	        </div>
+            		<h3 id="go-text"></h3> <!-- Элемент h3 для отображения поля -->
+			<h4 id="go-text2"></h4>
+			<h5 id="go-text3"></h5>
+			<h5 id="go-text4"></h5>
+               
+            <input type="text" id="answer" placeholder="Ваша дія">
+            <button class="my-button" onclick="rollDice()">Перевірити</button>
+                <div id="dice-container"> <!-- Изначально устанавливаем картинки кубиков согласно значениям dice1Value и dice2Value -->
+                <img id="dice1Image" alt="Кубик 1" class="dice">
+                <img id="dice2Image" alt="Кубик 2" class="dice">
+           	    </div>
+            
+                <h5 id="hint-text"></h5> <!-- Элемент h3 для отображения результата -->
+                <p id="hint1-text"></p> <!-- Элемент h3 для отображения результата -->
+                <p id="final"></p>
+        </div>
+           <script>
+                // Чтение значения goal из Local Storage
+                var goal = localStorage.getItem('goal');
+                var dice1Value = localStorage.getItem('dice1Value');
+                var dice2Value = localStorage.getItem('dice2Value');
+                var go = localStorage.getItem("go");
+                var t = localStorage.getItem("t");
+
+                document.getElementById("result-text").textContent = "Вас цікавить: " + goal; 
+		
+		        var dice1Image = document.getElementById("dice1Image");
+                var dice2Image = document.getElementById("dice2Image");
+                dice1Image.src = "dice1" + dice1Value + ".png";
+                dice2Image.src = "dice2" + dice2Value + ".png";
+                
+                if (go%8==0){
+                    window.location.href = "gra4.html";
+                }
+                if (dice1Value==dice2Value){
+		            document.getElementById("go-text").textContent = "Зараз ви на полі: " + smallArray[dice1Value-1];
+		            document.getElementById("go-text2").textContent = smallArray2[dice1Value-1];
+              	    document.getElementById("go-text3").textContent = "Що ви готові зробити у цій темі, для вирішення цього протирічча? Яку конкретну дію?";
+		         }
+                else{
+                    document.getElementById("go-text").textContent = "Зараз ви на полі: " + bigArray[go%24];
+		            document.getElementById("go-text2").textContent = bigArray2[go%24];
+                    document.getElementById("go-text4").textContent = "Що ви готові зробити у цій темі? Яку конкретну дію?";
+		        }
+                var messageText = document.getElementById("message-text");
+                var messageModal = document.getElementById("message-modal");
+            
+              function showMessage(message, timeout, style) {
+                    messageText.textContent = message;
+                    messageText.style.color = style.color;
+                    messageText.style.fontSize = style.fontSize;
+                  messageModal.style.display = 'flex';
+
+            setTimeout(function () {
+               closeMessageModal();
+                }, timeout);
+            }
+
+              function closeMessageModal() {
+                 messageModal.style.display = 'none';
+            }
+
+              function rollDice() {                    
+                    var dice1 = Math.floor(Math.random() * 6) + 1; 
+                    var dice2 = Math.floor(Math.random() * 6) + 1; 
+                    dice1Image.src = "dice1" + dice1 + ".png";
+                    dice2Image.src = "dice2" + dice2 + ".png";
+                    dice1Value = dice1;
+                    dice2Value = dice2;
+                    localStorage.setItem('dice1Value', dice1Value);
+                    localStorage.setItem('dice2Value', dice2Value);
+                    var resultText = document.getElementById("hint-text");
+                                        
+                  
+                 if (dice1Value >= dice2Value) {
+                  showMessage("Чудовий крок", 1000, { color: 'green', fontSize: '18px' });
+                  document.getElementById("hint-text").textContent = "Чудовий крок";
+                
+                    var aField = document.getElementById("answer");
+                    var a = aField.value; 
+                    var out = localStorage.getItem('final') + ";;\n" + a;
+                    localStorage.setItem('final', out);
+
+                 if (dice1Value!=dice2Value){
+                    document.getElementById("hint1-text").textContent = a;
+                    
+                    var u =eval( go) + eval(dice1Value*t);
+                     localStorage.setItem('go', u);
+                     localStorage.setItem('t', t);
+                    }                            
+                    setTimeout(function() {
+                    window.location.href = "gra3_mobil.html";
+                     }, 500);
+                    
+                    } else {
+                      showMessage("Йой, супротив Всесвіту більший за ваші сили. Яку іншу дію можна зробити?", 2500, { color: 'red', fontSize: '16px' });
+                     document.getElementById("hint-text").textContent = "Йой, супротив Всесвіту більший за ваші сили. Яку іншу дію можна зробити?";
+                
+                setTimeout(function () {
+                closeResultModal();
+                }, 2500);
+                    }            
+            	}
+              function closeResultModal() {
+                document.getElementById('result-modal').style.display = 'none';
+            }
+                // Відкриття модального вікна
+                function openModal() {
+                    document.getElementById('myModal').style.display = 'flex';
+                }
+                // Закриття модального вікна
+                function closeModal() {
+                    document.getElementById('myModal').style.display = 'none';
+                }
+                // Закриття модального вікна при кліку за межами вікна
+                    window.onclick = function (event) {
+                    if (event.target == document.getElementById('myModal')) {
+                    closeModal();
+                     }
+                }
+            </script>
+         </div>
+      </div>
+</body>
+</html>
