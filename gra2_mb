@@ -132,7 +132,7 @@
                     localStorage.setItem('t', t);
 
                 setTimeout(function () {
-                    window.location.href = "gra3_mobil.html";
+                    window.location.href = "gra3_mb.html";
                 }, 1500);
                 } else {
                     resultText.textContent = "Будь-ласка, переформулюйте ваше бажання/проект/ціль";
